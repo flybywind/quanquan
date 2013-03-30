@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <Button 
+        android:id="@+id/public_square"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="广场"
+        android:onClick="clickSquare"
+        />
+
+    <Button
+        android:id="@+id/map"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/public_square"
+        android:text="地图" 
+        android:onClick="clickMap"/>
+    
+     <Button 
+        android:id="@+id/map_marker"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/public_square"
+        android:text="标记"
+        android:onClick="clickMarker"/>
+
+    <Button
+        android:id="@+id/my_attention"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@id/map_marker"
+        android:layout_below="@id/map"
+        android:text="关注" 
+        android:onClick="clickMyattention"/>
+
+</RelativeLayout>
