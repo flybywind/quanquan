@@ -4,30 +4,57 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <Spinner
+    <!-- Spinner
         android:id="@+id/square_range_select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:alpha="50"
-        android:prompt="@string/range_prompt" />
-   
-    <Button 
-        android:id="@+id/square_talk"
-        android:text="吼吼"
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-  		android:layout_alignBottom="@+id/square_range_select"
-        android:onClick="squareTalk"/>
+        android:prompt="@string/range_prompt" /
+        android:layout_centerHorizontal="true"-->
+    <LinearLayout
+        android:id="@+id/seek_bar_layout"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+        android:layout_marginTop="10dp"    >
+        <TextView 
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/range_prompt"
+            android:layout_gravity="center_vertical"
+            />
+       <SeekBar 
+	        android:id="@+id/square_range_select"
+	        android:layout_width="0px"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:alpha="50"
+	        android:layout_gravity="center_vertical"
+	        />
+   		<TextView 
+   		    android:id="@+id/range_text"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/min_range"
+            android:layout_gravity="center_vertical"
+            />	
+	    <Button 
+	        android:id="@+id/square_talk"
+	        android:text="吼吼"
+	        android:textSize="20sp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="20dp"
+	        android:onClick="squareTalk"/> 
+    </LinearLayout>
+    
 	<ListView 
 	    android:id="@+id/square_talk_list"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:layout_below="@id/square_range_select"
+	    android:layout_below="@id/seek_bar_layout"
 	    android:layout_marginTop="15dp"
 	    ></ListView>
 

@@ -5,6 +5,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
 	<string name="range_prompt">直径</string>
+	<string name="min_range">500米</string>
+	<string name="max_range">3000米</string>
+	<string name="range_unit">米</string>
 	<string-array name="range_list">
 	    <item>500米</item>
 	    <item>1000米</item>

@@ -134,25 +134,26 @@ containing a value of this type.
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int gestureOverlayView1=0x7f04000b;
+        public static final int gestureOverlayView1=0x7f04000d;
         public static final int map=0x7f040005;
         public static final int map_marker=0x7f040006;
-        public static final int menu_settings=0x7f04000c;
+        public static final int menu_settings=0x7f04000e;
         public static final int my_attention=0x7f040007;
         public static final int none=0x7f040000;
         public static final int normal=0x7f040001;
         public static final int public_square=0x7f040004;
+        public static final int range_text=0x7f04000a;
         public static final int satellite=0x7f040002;
-        public static final int square_range_select=0x7f040008;
-        public static final int square_talk=0x7f040009;
-        public static final int square_talk_list=0x7f04000a;
+        public static final int seek_bar_layout=0x7f040008;
+        public static final int square_range_select=0x7f040009;
+        public static final int square_talk=0x7f04000b;
+        public static final int square_talk_list=0x7f04000c;
         public static final int terrain=0x7f040003;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int google_map=0x7f030001;
-        public static final int range_spinner_item=0x7f030002;
-        public static final int square_panel=0x7f030003;
+        public static final int square_panel=0x7f030002;
     }
     public static final class menu {
         public static final int activity_main=0x7f080000;
@@ -203,8 +204,11 @@ containing a value of this type.
          */
         public static final int common_google_play_services_update_title=0x7f050007;
         public static final int hello_world=0x7f05000c;
+        public static final int max_range=0x7f050010;
         public static final int menu_settings=0x7f05000d;
+        public static final int min_range=0x7f05000f;
         public static final int range_prompt=0x7f05000e;
+        public static final int range_unit=0x7f050011;
     }
     public static final class style {
         /** 
