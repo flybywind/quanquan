@@ -46,6 +46,11 @@
 		    android:enabled="true"
 		>
 	    </activity>
+	    <activity
+		    android:name=".EditorHouhou"
+		    android:enabled="true"
+		>
+	    </activity>
         <meta-data
 			android:name="com.google.android.maps.v2.API_KEY"
 			android:value="AIzaSyD9oaCZdLSUYYupfo7eoJdpg2qEeNLkQE8"/>

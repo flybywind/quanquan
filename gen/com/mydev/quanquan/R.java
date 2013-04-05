@@ -132,25 +132,34 @@ containing a value of this type.
     }
     public static final class drawable {
         public static final int circle_corner=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
+        public static final int emotion_smile=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
+        public static final int podcast=0x7f020003;
+        public static final int smile_big=0x7f020004;
     }
     public static final class id {
+        public static final int add_emotion=0x7f040016;
+        public static final int del_btn=0x7f040013;
+        public static final int editor_note=0x7f040012;
         public static final int load_more_prog=0x7f04000d;
         public static final int map=0x7f040005;
         public static final int map_marker=0x7f040006;
-        public static final int menu_settings=0x7f040011;
+        public static final int menu_settings=0x7f040017;
         public static final int my_attention=0x7f040007;
         public static final int none=0x7f040000;
         public static final int normal=0x7f040001;
         public static final int public_square=0x7f040004;
         public static final int range_text=0x7f04000a;
+        public static final int real_world_location=0x7f040011;
         public static final int satellite=0x7f040002;
+        public static final int save_btn=0x7f040015;
         public static final int seek_bar_layout=0x7f040008;
+        public static final int share_btn=0x7f040014;
         public static final int some_one_talk=0x7f04000e;
         public static final int square_msg_op=0x7f04000f;
         public static final int square_range_select=0x7f040009;
-        public static final int square_talk=0x7f04000b;
         public static final int square_talk_list=0x7f04000c;
+        public static final int square_talk_publish=0x7f04000b;
         public static final int square_talk_time=0x7f040010;
         public static final int terrain=0x7f040003;
     }
@@ -160,6 +169,7 @@ containing a value of this type.
         public static final int square_panel=0x7f030002;
         public static final int square_talk_item=0x7f030003;
         public static final int square_talk_load_more=0x7f030004;
+        public static final int texteditor=0x7f030005;
     }
     public static final class menu {
         public static final int activity_main=0x7f080000;
@@ -215,6 +225,8 @@ containing a value of this type.
         public static final int min_range=0x7f05000f;
         public static final int range_prompt=0x7f05000e;
         public static final int range_unit=0x7f050011;
+        public static final int submit=0x7f050013;
+        public static final int title_description=0x7f050012;
     }
     public static final class style {
         /** 

@@ -1,0 +1,81 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#262626"
+    tools:context=".MainActivity" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:textColor="#BFEFFF"
+            android:layout_marginRight="10dp"
+            android:text="@string/title_description" />
+        <EditText
+            android:id="@+id/real_world_location"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#262626"
+           	android:layout_gravity="center_vertical"
+           	android:background="#EFEFEF" >
+            <requestFocus android:layout_width="wrap_content" />
+        </EditText>
+    </LinearLayout>
+ 
+	
+    <EditText
+        android:id="@+id/editor_note"
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:gravity="top|left"
+        android:background="#E0FFFF"
+        android:scrollbarAlwaysDrawVerticalTrack="true" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right" >
+        <Button
+            android:id="@+id/del_btn"
+		    android:layout_width="50dp" 
+		    android:layout_height="50dp" 
+		    android:background="@android:drawable/ic_menu_delete"
+		    android:layout_marginRight="10dp"
+		    android:onClick="clickDelete"/>    
+		<Button
+		    android:id="@+id/share_btn"
+		    android:background="@android:drawable/ic_menu_share"
+	        android:layout_width="50dp"
+	        android:layout_height="50dp"
+	        android:layout_marginRight="10dp"
+		    
+		    android:onClick="clickShare"/>
+        <!-- 动态生成 
+        	android:src="@drawable/podcast"
+        	 android:src="@android:drawable/ic_menu_save" -->
+		<Button 
+	        android:id="@+id/save_btn"
+	        android:layout_width="wrap_content"
+	        android:text="发布"
+	        android:textColor="@android:color/white"
+	        android:layout_height="50dp"
+	        android:layout_marginRight="10dp"
+	        android:onClick="clickSave"/>
+		<Button 
+		    android:id="@+id/add_emotion"
+		    android:background="@drawable/smile_big"
+	        android:layout_width="50dp"
+	        android:layout_height="50dp"
+	        android:layout_marginRight="20dp"
+	        android:onClick="clickAddEmotion"/>
+		
+		</LinearLayout>
+</LinearLayout> 

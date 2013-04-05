@@ -8,6 +8,8 @@
 	<string name="min_range">500米</string>
 	<string name="max_range">3000米</string>
 	<string name="range_unit">米</string>
+	<string name="title_description">您的位置：</string>
+	<string name="submit">发布</string>
 	<string-array name="range_list">
 	    <item>500米</item>
 	    <item>1000米</item>

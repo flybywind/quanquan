@@ -43,6 +43,13 @@ public class SquareTalkList extends BaseAdapter {
 		}
 		
 	}
+	public void update(ArrayList<SquareTalkItem> new_talks)
+	{
+		for( SquareTalkItem talk : new_talks){
+			square_talk_list.add(talk);
+		}
+		
+	}
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -78,7 +85,7 @@ public class SquareTalkList extends BaseAdapter {
 			vg = (ViewHolder) convertView.getTag();
 		}
 		vg.some_one_talk.setText(square_talk_list.get(position).some_one_talk);
-		vg.square_talk_time.setText(square_talk_list.get(position).square_talk_time);
+		vg.square_talk_time.setText(square_talk_list.get(position).publish_time);
 		vg.square_msg_op.setOnClickListener(pay_attention);		
 		return convertView;
 	}
@@ -107,11 +114,11 @@ public class SquareTalkList extends BaseAdapter {
 	}
 	final static public class SquareTalkItem{
 		String some_one_talk;
-		String square_talk_time;
+		String publish_time;
 		public SquareTalkItem(String talk, String time) {
 			// TODO Auto-generated constructor stub
 			some_one_talk = talk;
-			square_talk_time = time;
+			publish_time = time;
 		}
 	}
 	final static public class Payattention implements OnClickListener{
