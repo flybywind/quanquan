@@ -3,8 +3,11 @@ package com.mydev.quanquan;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -17,6 +20,12 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		// 提示用户打开gps
+		LocationManager loc_manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+		if(!loc_manager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+			Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+			startActivity(intent);
+		}
 //		google_map_init();
 	}
 

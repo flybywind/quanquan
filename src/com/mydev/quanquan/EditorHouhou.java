@@ -50,6 +50,7 @@ public final class EditorHouhou extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.texteditor);
+		mLocationManager = new MyLocationManager(editor_activity);
 	}
 	
 	@Override
@@ -103,14 +104,17 @@ public final class EditorHouhou extends Activity{
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
+			LatLng bestLatLng = mLocationManager.getBestLocation();
 			SimpleDateFormat date_format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			String time = date_format.format(new java.util.Date());
 			HttpClient client = new DefaultHttpClient();
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			HttpPost post_req = new HttpPost(SERVER);
 			nameValuePairs.add(new BasicNameValuePair("user_id", "me"));
-			nameValuePairs.add(new BasicNameValuePair("latitude", "111"));
-			nameValuePairs.add(new BasicNameValuePair("longitude", "2222"));
+			nameValuePairs.add(new BasicNameValuePair("latitude", 
+						Double.toString(bestLatLng.latitude)));
+			nameValuePairs.add(new BasicNameValuePair("longitude", 
+						Double.toString(bestLatLng.longitude)));
 			nameValuePairs.add(new BasicNameValuePair("content", text_body));
 			nameValuePairs.add(new BasicNameValuePair("location", location));
 			nameValuePairs.add(new BasicNameValuePair("time", time));
@@ -146,7 +150,7 @@ public final class EditorHouhou extends Activity{
 	Handler mHandler = new Handler();
 	private EditText mEditorBody;
 	private EditText mEditorHeader;
-	private LatLng mCurGeoPoint;
+	private MyLocationManager mLocationManager;
 	private EditorHouhou editor_activity = this;
 	static String SERVER = "http://oohouhou.duapp.com/post.php";
 //	static String SERVER = "http://fly.allalla.com/post.php";
