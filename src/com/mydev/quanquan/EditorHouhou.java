@@ -31,6 +31,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -51,6 +52,8 @@ public final class EditorHouhou extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.texteditor);
 		mLocationManager = new MyLocationManager(editor_activity);
+		TelephonyManager phoneMgr = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+		mThisPhoneNum = phoneMgr.getLine1Number(); 
 	}
 	
 	@Override
@@ -110,7 +113,7 @@ public final class EditorHouhou extends Activity{
 			HttpClient client = new DefaultHttpClient();
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			HttpPost post_req = new HttpPost(SERVER);
-			nameValuePairs.add(new BasicNameValuePair("user_id", "me"));
+			nameValuePairs.add(new BasicNameValuePair("user_id", mThisPhoneNum));
 			nameValuePairs.add(new BasicNameValuePair("latitude", 
 						Double.toString(bestLatLng.latitude)));
 			nameValuePairs.add(new BasicNameValuePair("longitude", 
@@ -148,6 +151,7 @@ public final class EditorHouhou extends Activity{
 		
 	}
 	Handler mHandler = new Handler();
+	private String mThisPhoneNum;
 	private EditText mEditorBody;
 	private EditText mEditorHeader;
 	private MyLocationManager mLocationManager;
