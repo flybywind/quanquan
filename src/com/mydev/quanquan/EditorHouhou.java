@@ -2,6 +2,7 @@ package com.mydev.quanquan;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,10 +11,14 @@ import java.util.Locale;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 
 import android.R.drawable;
 import android.app.Activity;
@@ -25,6 +30,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -60,26 +66,88 @@ public final class EditorHouhou extends Activity{
 			throws ClientProtocolException, IOException
 	{
 //		Toast.makeText(editor_activity, "发布", Toast.LENGTH_SHORT).show();
-		String location = mEditorHeader.getText().toString();
-		String text_body = mEditorBody.getText().toString();
-		SimpleDateFormat date_format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		String time = date_format.format(new java.util.Date());
-		HttpClient client = new DefaultHttpClient();
-		
-		String post_str = SERVER+"?content="+text_body+
-								 "&location="+location+
-								 "&time="+time;
-		HttpPost post_req = new HttpPost(post_str);
-		if( HttpStatus.SC_OK != client.execute(post_req).getStatusLine().getStatusCode() )
-			Toast.makeText(editor_activity, "发送失败", Toast.LENGTH_SHORT).show();
+		String text_body;
+		String location;
+//		if( mEditorBody.getText() == null ){
+//			Toast.makeText(editor_activity, "please type body", Toast.LENGTH_SHORT).show();
+//			return;
+//		}
+//		if( mEditorHeader.getText() == null ){
+//			location = "unknown";
+//		}else{
+//			
+//		}
+		location = mEditorHeader.getText().toString();
+		text_body = mEditorBody.getText().toString();
+		if(text_body.isEmpty()){
+			Toast.makeText(editor_activity, "please type body", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		if(location.isEmpty()){
+			location = "unknown";
+		}
+		new Thread(new PostTalk(text_body, location)).start();
 	}
 	public void clickAddEmotion(View v){
 //		Toast.makeText(editor_activity, "添加表情", Toast.LENGTH_SHORT).show();
 	}
+	
+	class PostTalk implements Runnable{
+		String text_body;
+		String location;
+		HttpResponse response;
+		public PostTalk(String text_body, String loc){
+			this.text_body = text_body;
+			this.location = loc;
+		}
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			SimpleDateFormat date_format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			String time = date_format.format(new java.util.Date());
+			HttpClient client = new DefaultHttpClient();
+			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			HttpPost post_req = new HttpPost(SERVER);
+			nameValuePairs.add(new BasicNameValuePair("user_id", "me"));
+			nameValuePairs.add(new BasicNameValuePair("latitude", "111"));
+			nameValuePairs.add(new BasicNameValuePair("longitude", "2222"));
+			nameValuePairs.add(new BasicNameValuePair("content", text_body));
+			nameValuePairs.add(new BasicNameValuePair("location", location));
+			nameValuePairs.add(new BasicNameValuePair("time", time));
+			
+			try {
+				post_req.setEntity(new UrlEncodedFormEntity(nameValuePairs, HTTP.UTF_8));
+				response = client.execute(post_req);
+				
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			mHandler.post(new Runnable() {
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					if( HttpStatus.SC_OK != response.getStatusLine().getStatusCode() )
+						Toast.makeText(editor_activity, "发送失败, RET: "+response.getStatusLine().getStatusCode(),
+								Toast.LENGTH_SHORT).show();
+					else
+						Toast.makeText(editor_activity, "发送成功", Toast.LENGTH_SHORT).show();
+				}
+			});			
+		}
+		
+	}
+	Handler mHandler = new Handler();
 	private EditText mEditorBody;
 	private EditText mEditorHeader;
 	private LatLng mCurGeoPoint;
 	private EditorHouhou editor_activity = this;
 	static String SERVER = "http://oohouhou.duapp.com/post.php";
-	
+//	static String SERVER = "http://fly.allalla.com/post.php";
 }

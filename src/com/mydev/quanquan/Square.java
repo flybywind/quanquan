@@ -133,7 +133,7 @@ public class Square  extends Activity {
 		ArrayList<SquareTalkItem> square_talks;
 		String url;
 		LoadMore(String Url){
-			url = Url;
+			url = Url+"?user_id=me";
 			square_talks = new ArrayList<SquareTalkItem>();
 		}
 		@Override
@@ -186,7 +186,7 @@ public class Square  extends Activity {
 	       }
 		}	
 	}
-	String server_url = "http://oohouhou.duapp.com/";
+	String server_url = "http://oohouhou.duapp.com/get.php";
 	public LoadMore mLoad_more = new LoadMore(server_url);
 	Square mContext = this;
 	SquareTalkList mSquare_talk_adapter;
