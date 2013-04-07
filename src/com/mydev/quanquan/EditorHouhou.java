@@ -36,12 +36,16 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -65,6 +69,7 @@ public final class EditorHouhou extends Activity{
 		((Button)findViewById(R.id.save_btn)).setText(R.string.submit);
 		mEditorBody = (EditText)findViewById(R.id.editor_note);
 		mEditorHeader = (EditText)findViewById(R.id.real_world_location);
+		mProgressBar = (ProgressBar)findViewById(R.id.submit_wait);
 	}
 	public void clickSave(View v) 
 			throws ClientProtocolException, IOException
@@ -90,7 +95,15 @@ public final class EditorHouhou extends Activity{
 		if(location.isEmpty()){
 			location = "unknown";
 		}
-		new Thread(new PostTalk(text_body, location)).start();
+		if(mProgressBar.getVisibility() == View.INVISIBLE)
+		{
+			mProgressBar.setVisibility(View.VISIBLE);
+			int d = CommonFunc.getDIP(30, editor_activity);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(d, d) ;
+			lp.gravity = Gravity.CENTER_HORIZONTAL;
+			mProgressBar.setLayoutParams(lp);
+			new Thread(new PostTalk(text_body, location)).start();
+		}
 	}
 	public void clickAddEmotion(View v){
 //		Toast.makeText(editor_activity, "添加表情", Toast.LENGTH_SHORT).show();
@@ -140,17 +153,29 @@ public final class EditorHouhou extends Activity{
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
+					if(mProgressBar.getVisibility() == View.VISIBLE)
+					{
+						mProgressBar.setVisibility(View.INVISIBLE);
+						mProgressBar.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+					}
+					if( response == null )
+					{
+						Toast.makeText(editor_activity, "未联网", Toast.LENGTH_SHORT).show();
+						return;
+					}
 					if( HttpStatus.SC_OK != response.getStatusLine().getStatusCode() )
 						Toast.makeText(editor_activity, "发送失败, RET: "+response.getStatusLine().getStatusCode(),
 								Toast.LENGTH_SHORT).show();
 					else
 						Toast.makeText(editor_activity, "发送成功", Toast.LENGTH_SHORT).show();
+					
 				}
 			});			
 		}
 		
 	}
 	Handler mHandler = new Handler();
+	ProgressBar mProgressBar;
 	private String mThisPhoneNum;
 	private EditText mEditorBody;
 	private EditText mEditorHeader;
